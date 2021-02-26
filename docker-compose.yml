@@ -8,7 +8,7 @@ services:
       default:
     volumes:
       - ./scripts:/scripts
-    entrypoint: [ "/scripts/setup.sh" ] # Make sure this file exists (see below for the setup.sh)
+    entrypoint: [ "/scripts/setup.sh" ] # Make sure this file exists
     depends_on:
       - mongo1
       - mongo2
@@ -25,7 +25,7 @@ services:
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "false" ]
     volumes:
-      - ./data1:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb
+      - ./data1:/data/db
       - ./data1/configdb:/data/configdb
   mongo2:
     hostname: mongo2
@@ -38,7 +38,7 @@ services:
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "false" ]
     volumes:
-      - ./data2:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb
+      - ./data2:/data/db
       - ./data2/configdb:/data/configdb
   mongo3:
     hostname: mongo3
@@ -51,5 +51,5 @@ services:
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "false" ]
     volumes:
-      - ./data3:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb
+      - ./data3:/data/db
       - ./data3/configdb:/data/configdb
